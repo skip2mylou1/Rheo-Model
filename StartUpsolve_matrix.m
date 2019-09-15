@@ -7,20 +7,21 @@ G = 320.33;
 
 % (Shear) Rate is a global variable. It is a parameter of the model that
 % needs to be studied.
-global Rate
-% global Rate_matrix
+% global Rate
+global Rate_matrix
 % create a series of shear rate ranging from 10^-3 ~ 10^3 s-1
 for i = 1 : 31
     Rate = 10^(-3 + 0.2*(i - 1));
     rate(i) = Rate;     %store the shear rate
 %     matrix of shear rate, for simple steady shear, the result is as below
-%     Rate_matrix = [[0,0,0];[Rate,0,0];[0,0,0]];
-%     A0 = [[1,0,0];[0,1,0];[0,0,1]];   %initial configuration
-    A0 = [1;1;1;0;0;0];     %initialize the configuration to isotropic state
+    Rate_matrix = [[0,0,0];[Rate,0,0];[0,0,0]];
+    A0 = [[1,0,0];[0,1,0];[0,0,1]];   %initial configuration
+%     A0 = [1;1;1;0;0;0];     %initialize the configuration to isotropic state
     % created the time range used in ODE
     tspan = [0 10^(3 - 0.1*(i - 1))];
     % Use ODE solver to calculate A as a function of t
-    [t,A] = ode45('odefun1',tspan,A0);
+    A0 = reshape(A0, 9, 1);
+    [t,A] = ode45('odefunmatrix',tspan,A0);
     sigma = G * A(:,4); % sigma = stress
     N1 = G * (A(:,1) - A(:,2)); % N1 is the first normal stress difference
     [t_steady,steady] = max(t);
@@ -33,7 +34,7 @@ for i = 1 : 31
     
     subplot(1,2,2);
     plot(t,N1);
-    title(['Normal Stress Difference ~ t (' num2str(i) ')'])
+    title(['Normal Stress Difference ~ t ' num2str(i) ')'])
     %the following results are documented to make a plot in order to find
     %the scaling of properties
     

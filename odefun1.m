@@ -18,6 +18,7 @@ tD = 3.206; tR = 0.0697; Bccr = 1.25; delta = -0.5;
 
 % dAdt(1)=a11; dAdt(2)=a22; dAdt(3)=a33; 
 % dAdt(4)=a12; dAdt(5)=a23; dAdt(6)=a13;
+
 dAdt(1) = 2 * Rate * A(4) - 1 / tD * (A(1) - 1) - 2 / tR * (1 - sqrt(3 / (A(1) + A(2) + A(3)))) * (A(1) + Bccr * ((A(1) + A(2) + A(3)) / 3)^delta * (A(1) - 1));
 dAdt(2) = -1 / tD * (A(2) - 1) - 2 / tR * (1 - sqrt(3 / (A(1) + A(2) + A(3)))) * (A(2) + Bccr * ((A(1) + A(2) + A(3)) / 3)^delta * (A(2) - 1));
 dAdt(3) = -1 / tD * (A(3) - 1) - 2 / tR * (1 - sqrt(3 / (A(1) + A(2) + A(3)))) * (A(3) + Bccr * ((A(1) + A(2) + A(3)) / 3)^delta * (A(3) - 1));
