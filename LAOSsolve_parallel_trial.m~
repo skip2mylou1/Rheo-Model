@@ -1,3 +1,4 @@
+%
 clear all;
 % G is the modulus of the polymer, the unit is Pa. This is an adjustable parameter.
 G = 320.33;
@@ -16,15 +17,7 @@ parfor i = 1 : loop_i   %the original is 36
     rate(i) = Rate;
     %figure(i);
     freq = [];
-    f = [];
-    strain = [];
-    stressAmplitude = [];
-    I1 = [];
-    basefreq = [];
-    I3 = [];
-    thirdfreq = [];
-    I31 = [];
-    
+    f
     tic;
     for j = 1 : 14
         Freq = 10^(-3 + 0.2*(j - 1)); % frequency from 10^-3 ~ 10^-0.4

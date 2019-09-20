@@ -1,3 +1,4 @@
+%
 clear all;
 % G is the modulus of the polymer, the unit is Pa. This is an adjustable parameter.
 G = 320.33;
@@ -10,23 +11,12 @@ global Freq
 loop_i = 10;
 run_time = zeros(loop_i);
 
-parfor i = 1 : loop_i   %the original is 36
-    G = 320.33;
+for i = 1 : loop_i   %the original is 36
     Rate = 10^(-3 + 0.2*(i - 1));
     rate(i) = Rate;
     %figure(i);
-    freq = [];
-    f = [];
-    strain = [];
-    stressAmplitude = [];
-    I1 = [];
-    basefreq = [];
-    I3 = [];
-    thirdfreq = [];
-    I31 = [];
-    
     tic;
-    for j = 1 : 14
+        for j = 1 : 14
         Freq = 10^(-3 + 0.2*(j - 1)); % frequency from 10^-3 ~ 10^-0.4
         freq(j) = Freq;
         strain(j,i) = rate(i) / freq(j);
@@ -64,7 +54,7 @@ parfor i = 1 : loop_i   %the original is 36
         I31(j,i) = I3(j,i)/I1(j,i);
     end;
     % for high frequency, use ode15 to calculate
-    for j = 15 : 31
+        for j = 15 : 31
         Freq = 10^(-3 + 0.2*(j - 1));
         freq(j) = Freq;
         strain(j,i) = rate(i) / freq(j);
@@ -106,6 +96,6 @@ parfor i = 1 : loop_i   %the original is 36
 end;
 
 %store the data calculated 
-csvwrite('LAOS_strain_2.csv', strain);
-csvwrite('LAOS_stressAmplitude_2.csv', stressAmplitude);
-csvwrite('LAOS_I31.csv_2', I31);
+csvwrite('LAOS_strain.csv', strain);
+csvwrite('LAOS_stressAmplitude.csv', stressAmplitude);
+csvwrite('LAOS_I31.csv', I31);
