@@ -7,11 +7,16 @@ global Freq
 % create a series of shear rate ranging from 10^-3 ~ 10^3 s-1
 
 % for low frequency, use ode15 to calculate
-for i = 1 : 36
+% make it smaller to speed up
+loop_i = 10;
+run_time = zeros(loop_i);
+
+for i = 1 : loop_i   %the original is 36
     Rate = 10^(-3 + 0.2*(i - 1));
     rate(i) = Rate;
     %figure(i);
-    for j = 1 : 14
+    tic;
+        for j = 1 : 14
         Freq = 10^(-3 + 0.2*(j - 1)); % frequency from 10^-3 ~ 10^-0.4
         freq(j) = Freq;
         strain(j,i) = rate(i) / freq(j);
@@ -82,6 +87,8 @@ for i = 1 : 36
         thirdfreq(j,i) = f(pos3);
         I31(j,i) = I3(j,i)/I1(j,i);
     end;
+    t_run = toc;
+    run_time(i) = t_run;
 %     filename = 'LAOS_result.xlsx';
 %     xlswrite(filename,strain,1);
 %     xlswrite(filename,stressAmplitude,2);
