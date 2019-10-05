@@ -49,7 +49,7 @@ for i = 1 : 36
         I31(j,i) = I3(j,i)/I1(j,i);
     end;
     % for high frequency, use ode15 to calculate
-        for j = 15 : 31
+    for j = 15 : 31
         Freq = 10^(-3 + 0.2*(j - 1));
         freq(j) = Freq;
         strain(j,i) = rate(i) / freq(j);
