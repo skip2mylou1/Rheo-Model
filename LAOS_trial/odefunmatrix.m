@@ -1,4 +1,4 @@
-function dAdt = odefunmatrix(t, A)
+function dAdt = odefunmatrix(t, A, Rate)
 % Loading the configuration tensor A(6x1), then use the scalar form of the
 % tensor to calculate the dA/dt. Next, this relationship is used to solve
 %  the ODE and obtain A as a function of t
@@ -19,9 +19,13 @@ tD = 3.206; tR = 0.0697; Bccr = 1.25; delta = -0.5;
 
 % dAdt(1)=a11; dAdt(2)=a22; dAdt(3)=a33; 
 % dAdt(4)=a12; dAdt(5)=a23; dAdt(6)=a13;
-global Rate_matrix
-dAdt_matrix = A * Rate_matrix + (Rate_matrix)' * A - 1 / tD * (A - eye(3)) - 2 / tR * (1 - sqrt(3 / (trace(A)))) * (A + Bccr * ((trace(A)) / 3)^delta * (A - eye(3)));
+Rate_matrix = [[0,0,0];[Rate,0,0];[0,0,0]];
+trA = A(1,1)+A(2,2)+A(3,3);
+% dAdt_matrix = A * Rate_matrix + (Rate_matrix)' * A - 1 / tD * (A - eye(3)) - 2 / tR * (1 - sqrt(3 / (trace(A)))) * (A + Bccr * ((trace(A)) / 3)^delta * (A - eye(3)));
+dAdt_matrix = A * Rate_matrix + (Rate_matrix)' * A - 1 / tD * (A - eye(3)) - 2 / tR * (1 - sqrt(3 / (trA))) * (A + Bccr * ((trA) / 3)^delta * (A - eye(3)));
 dAdt = reshape(dAdt_matrix, 9,1);
+% new order is:
+%[a11; a21; a31; a12; a22; a32; a13; a23; a33] 
 
 % dAdt(1) = 2 * Rate * A(4) - 1 / tD * (A(1) - 1) - 2 / tR * (1 - sqrt(3 / (A(1) + A(2) + A(3)))) * (A(1) + Bccr * ((A(1) + A(2) + A(3)) / 3)^delta * (A(1) - 1));
 % dAdt(2) = -1 / tD * (A(2) - 1) - 2 / tR * (1 - sqrt(3 / (A(1) + A(2) + A(3)))) * (A(2) + Bccr * ((A(1) + A(2) + A(3)) / 3)^delta * (A(2) - 1));
