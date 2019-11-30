@@ -22,7 +22,7 @@ Shear rate is now a parameter that could be changed in LAOS.
 
 # MATLAB runtime
 
-To use MATLAB runtime, download the version 9.3 (R2017b) of the MATLAB Runtime from the website and install it before running the .exe file.
+To use MATLAB runtime, download the version 9.3 (R2017b) of the MATLAB Runtime from the website (https://www.mathworks.com/products/compiler/matlab-runtime.html) and install it before running the .exe file.
 
 
 
