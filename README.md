@@ -25,6 +25,9 @@ Shear rate is now a parameter that could be changed in LAOS.
 To use MATLAB runtime, download the version 9.3 (R2017b) of the MATLAB Runtime from the website and install it before running the .exe file.
 
 
-Reference:
+
+
+
+## Reference:
 1. Likhtman, A. E., & Graham, R. S. (2003). Simple constitutive equation for linear polymer melts derived from molecular theory: Rolie–Poly equation. *Journal of Non-Newtonian Fluid Mechanics, 114(1)*, 1-12.
 
